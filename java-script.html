@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Program Hitung Umur</h2>
+    <label for="tahun">Masukan Tahun Lahir:</label>
+    <input type="number" id="tahun" placeholder="contoh: 2000">
+    <button onclick="hitungUmur()">Hitung</button>
+
+    <p id="hasil"></p>
+
+    <script>
+        function hitungUmur() {
+            // Ambil elemen hasil untuk memudahkan penulisan
+            const hasilElement = document.getElementById("hasil");
+
+            // Ambil nilai input tahun lahir (sebagai string)
+            let tahunLahirString = document.getElementById("tahun").value;
+
+            // Atur ulang warna teks ke hitam setiap kali dihitung (default)
+            hasilElement.style.color = "black";
+            
+            // --- VALIDASI DIMULAI ---
+
+            // 1. Jika Kosong
+            if (tahunLahirString === "") {
+                hasilElement.innerHTML = "Tahun lahir tidak boleh kosong!";
+                hasilElement.style.color = "red";
+                return; // Hentikan eksekusi jika input kosong
+            }
+
+            // Konversi nilai input menjadi integer (angka)
+            let tahunLahir = parseInt(tahunLahirString);
+            let tahunSekarang = new Date().getFullYear();
+
+            // 2. Jika lebih besar dari tahun sekarang
+            if (tahunLahir > tahunSekarang) {
+                hasilElement.innerHTML = "Tahun lahir tidak boleh lebih besar dari tahun sekarang (" + tahunSekarang + ")!";
+                hasilElement.style.color = "red";
+                return; // Hentikan eksekusi jika tahun lahir tidak valid
+            }
+            
+            // --- VALIDASI SELESAI ---
+
+            // JIKA VALIDASI LOLOS, LAKUKAN PERHITUNGAN
+            let Umur = tahunSekarang - tahunLahir;
+
+            // Tampilkan hasil akhir yang benar
+            hasilElement.innerHTML = "Umur kamu sekarang adalah **" + Umur + " tahun**.";
+            hasilElement.style.color = "green"; // Opsi: berikan warna hijau jika sukses
+        }
+    </script>
+</body>
+</html>
